@@ -8,15 +8,10 @@ namespace net_il_mio_fotoalbum.Models
     {
         public AlbumContext(DbContextOptions<AlbumContext> options) : base(options) { }
 
-        DbSet<Image> Images { get; set; }
-        DbSet<Category> Categories { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public void Seed()
-        {
-            Seed(Users);
-        }
-
-        public void Seed(IQueryable<IdentityUser> users)
         {
             var imageSeed = new Image[]
             {
@@ -91,7 +86,7 @@ namespace net_il_mio_fotoalbum.Models
 
             if (!Users.Any(u => u.Email == "admin@dev.com") && !UserRoles.Any())
             {
-                var admin = users.First(u => u.Email == "admin@dev.com");
+                var admin = Users.First(u => u.Email == "admin@dev.com");
 
                 var adminRole = Roles.First(r => r.Name == "Admin");
 
